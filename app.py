@@ -1,6 +1,7 @@
 
 import time
 import requests
+import json
 def serverrequest(data):
 
 
@@ -26,7 +27,15 @@ def checkcode(codes_array):
     check_response=[]
     for code in codes_array:
         time.sleep(1)
-        check_response.append(code+"       "+serverrequest(code))
+        api=json.loads(serverrequest(code))
+        response=""
+        if(api["message"]==""):
+            response= "successful coupon appiled "
+        else:
+            response=api["message"]
+
+
+        check_response.append(code+"       "+response)
     return check_response
 
 
